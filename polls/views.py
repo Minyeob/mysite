@@ -16,7 +16,7 @@ def detail(request, question_id):
 def vote(request, question_id):
     p = get_object_or_404(Question, pk=question_id)
     try:
-        i=request.POST['choice']
+        i = request.POST['choice']
         j = i.replace('"','')
         selected_choice = p.choice_set.get(pk=j)
     except (KeyError, Choice.DoesNotExist):
