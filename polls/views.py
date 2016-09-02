@@ -2,7 +2,9 @@ from django.shortcuts import render, get_object_or_404
 from polls.models import Question, Choice
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
+import logging
 
+logger = logging.getLogger(__name__)
 
 def index(request):
     latest_question_list = Question.objects.all().order_by('-pub_date')[:5]
@@ -14,6 +16,7 @@ def detail(request, question_id):
     return render(request, 'polls/detail.html', {'question': question})
     
 def vote(request, question_id):
+    logger.debug("vote().question_id: %s" % question_id)
     p = get_object_or_404(Question, pk=question_id)
     try:
         i = request.POST['choice']

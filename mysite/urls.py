@@ -16,9 +16,12 @@ Including another URLconf
 """
 from django.conf.urls import url, patterns, include
 from django.contrib import admin
+from mysite import views
 
 urlpatterns = patterns('',
+    url(r'^$', views.HomeView.as_view(), name='home'),
     url(r'^polls/', include('polls.urls', namespace="polls")),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^books/', include('books.urls', namespace="books")),
+    url(r'^currency/', include('currency.urls', namespace="currency")),
 )
