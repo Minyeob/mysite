@@ -12,15 +12,20 @@ import json
 import urllib2
 import datetime
 
-class CurrencyIndexView(TemplateView):
-    template_name = 'currency/index.html'
+class CurrencyIndexView(View):
+    def get(self, request):
+        choice_list = Choice.objects.all()
+        return render(request, 'currency/index.html', {'choice_list': choice_list})     
 
 class SelectView(View):
-    def get(self, request):
+    def post(self, request):
         #lastcurrency = CurrencyKRW.objects.last()
         #if lastcurrency==datetime.date.today():
         choice_id = request.POST['choice']
         selected_choice = Choice.objects.filter(pk=choice_id)
+        CurrencyModel_list = [CurrencyKRW, CurrencyEUR, CurrencyCNY, CurrencyJPY, CurrencyGBP]
+        for currencymodel in CurrencyModel_list:
+            
         lastcurrency = CurrencyModel.objects.filter(nation=selected_choice.choice_text).last()
         if lastcurrency.pub_date==datetime.date.today():
             lastcurrency.currency_final = lastcurrency.currency_rate/CurrencyKRW.objects.last().currency_rate

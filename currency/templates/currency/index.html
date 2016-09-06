@@ -3,7 +3,7 @@
 {% block content %}
     <form action="{% url 'currency:select' %}" method="post">
     {% csrf_token %}
-    {% for choice in Choice.objects.all() %}
+    {% for choice in choice_list %}
         <input type="radio" name="choice" id="choice{{forloop.counter}}" value="{{choice.id}}" />
         <label for="choice{{forloop.counter}}">
         {{choice.choice_text}}
