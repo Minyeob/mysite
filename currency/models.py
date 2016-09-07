@@ -27,23 +27,38 @@ class CurrencyModel(models.Model):
     
 #currency of EURO
 class CurrencyEUR(CurrencyModel):
-    nation = "EUR"
+    def __init__(self, *args, **kwargs):
+        super(CurrencyEUR, self).__init__(*args, **kwargs)
+        nation = models.CharField(max_length=3, default='EUR')
+        nation.contribute_to_class(self, 'nation')
 
 #currency of Korean Won        
 class CurrencyKRW(CurrencyModel):
-    nation = "KRW"
+     def __init__(self, *args, **kwargs):
+        super(CurrencyKRW, self).__init__(*args, **kwargs)
+        nation = models.CharField(max_length=3, default='KRW')
+        nation.contribute_to_class(self, 'nation')
     
 #currency of Chinese Yuan    
 class CurrencyCNY(CurrencyModel):
-    nation = "CNY"
+     def __init__(self, *args, **kwargs):
+        super(CurrencyCNY, self).__init__(*args, **kwargs)
+        nation = models.CharField(max_length=3, default='CNY')
+        nation.contribute_to_class(self, 'nation')
     
 #currency of Japanese Yen
 class CurrencyJPY(CurrencyModel):
-    nation = "JPY"
+     def __init__(self, *args, **kwargs):
+        super(CurrencyJPY, self).__init__(*args, **kwargs)
+        nation = models.CharField(max_length=3, default='JPY')
+        nation.contribute_to_class(self, 'nation')
     
 #currency of British Pound    
 class CurrencyGBP(CurrencyModel):
-    nation = "GBP"
+     def __init__(self, *args, **kwargs):
+        super(CurrencyGBP, self).__init__(*args, **kwargs)
+        nation = models.CharField(max_length=3, default='GBP')
+        nation.contribute_to_class(self, 'nation')
     
 
     

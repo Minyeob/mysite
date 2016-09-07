@@ -21,14 +21,19 @@ class SelectView(View):
     def post(self, request):
         #lastcurrency = CurrencyKRW.objects.last()
         #if lastcurrency==datetime.date.today():
+        #request.POST is object include data in submitted form
         choice_id = request.POST['choice']
         selected_choice = Choice.objects.filter(pk=choice_id)
-        CurrencyModel_list = [CurrencyKRW, CurrencyEUR, CurrencyCNY, CurrencyJPY, CurrencyGBP]
-        for currencymodel in CurrencyModel_list:
-            
-        lastcurrency = CurrencyModel.objects.filter(nation=selected_choice.choice_text).last()
+        currencyModel_list = [CurrencyKRW, CurrencyEUR, CurrencyCNY, CurrencyJPY, CurrencyGBP]
+        selected_currency_model = currencyModel_list[0]
+        for currencymodel in currencyModel_list:
+            if currencymodel.objects.last().nation==selected_choice:
+                selected_currency_model = currencymodel
+        lastcurrency = selected_currency_model.objects.last()
+        
         if lastcurrency.pub_date==datetime.date.today():
             lastcurrency.currency_final = lastcurrency.currency_rate/CurrencyKRW.objects.last().currency_rate
+            lastcurrency.save()
         else:
             currencyeur = CurrencyEUR()
             currencyeur.save()
@@ -54,6 +59,7 @@ class SelectView(View):
             currencyjpy.save()
             currencygbp.save()
             lastcurrency.currency_final = lastcurrency.currency_rate/CurrencyKRW.objects.last().currency_rate
+            lastcurrency.save()
         return render(request, 'currency/result.html', {'currency': lastcurrency})    
             
     """def get(self, request):
