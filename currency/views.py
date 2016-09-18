@@ -33,15 +33,15 @@ class CurrencyIndexView(FormView):
 class SelectView(View):
     def get(self, request):
         
-        used_amount = request.POST['used_amount_field']
-        used_amount_string = unicodedata.normalize('NFKD', used_amount).encode('ascii','ignore')
+        used_amount = request.POST.get('used_amount_field', False)
+        #used_amount_string = unicodedata.normalize('NFKD', used_amount).encode('ascii','ignore')
         selected_currency = request.POST.get('select_currency_field')
-        selected_currency_string = unicodedata.normalize('NFKD', selected_currency).encode('ascii','ignore')
+        #selected_currency_string = unicodedata.normalize('NFKD', selected_currency).encode('ascii','ignore')
         #render(request, 'currency/result.html', {'used_amount':used_amount, 'selected_currency':selected_currency})
         currencyModel_list = [CurrencyKRW.objects.last(), CurrencyEUR.objects.last(), CurrencyCNY.objects.last(), CurrencyJPY.objects.last(), CurrencyGBP.objects.last()]
         selected_currency_model = currencyModel_list[0]
         for currencymodel in currencyModel_list:
-            if currencymodel.nation==selected_currency_string:
+            if currencymodel.nation==selected_currency:
                 selected_currency_model = currencymodel
         lastcurrency = selected_currency_model
         
