@@ -20,11 +20,12 @@ class InputValueForm(forms.Form):
     
     #Control when form is submitted
     def submitted(self, request):
-        used_amount = request.POST['used_amount_field']
+        #used_amount = request.POST['used_amount_field']
         #used_amount_string = unicodedata.normalize('NFKD', used_amount).encode('ascii','ignore')
-        selected_currency = request.POST.get('select_currency_field')
+        #selected_currency = request.POST.get('select_currency_field')
         #selected_currency_string = unicodedata.normalize('NFKD', selected_currency).encode('ascii','ignore')
         #render(request, 'currency/result.html', {'used_amount':used_amount, 'selected_currency':selected_currency})
+        """
         currencyModel_list = [CurrencyKRW.objects.last(), CurrencyEUR.objects.last(), CurrencyCNY.objects.last(), CurrencyJPY.objects.last(), CurrencyGBP.objects.last()]
         selected_currency_model = currencyModel_list[0]
         for currencymodel in currencyModel_list:
@@ -57,4 +58,4 @@ class InputValueForm(forms.Form):
             currencygbp.save()
             lastcurrency.currency_final = CurrencyKRW.objects.last().currency_rate/lastcurrency.currency_rate
             lastcurrency.save()
-        return render(request, 'currency/result.html', {'currency': lastcurrency})
+        return render(request, 'currency/result.html', {'currency': lastcurrency})"""
