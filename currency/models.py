@@ -15,6 +15,7 @@ class CurrencyModel(models.Model):
     currency_rate = models.FloatField(default=0)
     #final currency is nation's currency to krw
     currency_final = models.FloatField(default=0)
+    #created date will be registered, data update will be done per day
     pub_date = models.DateField('published date', default=datetime.date.today())
     
     def __str__(self):  # __str__ on python3
