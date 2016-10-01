@@ -44,7 +44,7 @@ class SelectView(View):
             
             #if created date of latest object is today, then use latest object
             if datecheck==True:
-                lastcurrency.currency_final = CurrencyKRW.objects.last().currency_rate/lastcurrency.currency_rate
+                lastcurrency.currency_final = round(CurrencyKRW.objects.last().currency_rate/lastcurrency.currency_rate, 2)
                 lastcurrency.save()
             #if created date of latest object is not today, then load new currency data and reload latest object of selected currency model
             else:
@@ -53,7 +53,7 @@ class SelectView(View):
                 lastcurrency.currency_final = CurrencyKRW.objects.last().currency_rate/lastcurrency.currency_rate
                 lastcurrency.save()
         
-        used_amount_to_krw = lastcurrency.currency_final * used_amount
+        used_amount_to_krw = int(lastcurrency.currency_final * used_amount)
         return render(request, 'currency/result.html', {'currency': lastcurrency, 'used_amount_to_krw': used_amount_to_krw, 'used_amount': used_amount})
         
         

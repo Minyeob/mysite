@@ -10,7 +10,7 @@ class Currency_Setting:
         currencyModel_list = [CurrencyKRW.objects.last(), CurrencyEUR.objects.last(), CurrencyCNY.objects.last(), CurrencyJPY.objects.last(), CurrencyGBP.objects.last()]
         selected_currency_model = currencyModel_list[0]
         for currencymodel in currencyModel_list:
-            if currencymodel.nation==selected_currency:
+            if currencymodel.title==selected_currency:
                 selected_currency_model = currencymodel
         return selected_currency_model
     
