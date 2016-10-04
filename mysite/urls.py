@@ -24,4 +24,5 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^books/', include('books.urls', namespace="books")),
     url(r'^currency/', include('currency.urls', namespace="currency")),
+    url(r'^user/', include('login.urls', namespace="user")),
 )

@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'polls',
     'books',
-    'currency'
+    'currency',
+    'login',
 ]
 
 MIDDLEWARE_CLASSES = [
